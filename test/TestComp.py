@@ -1,3 +1,4 @@
+import allure
 import pytest
 from Api.WeatherApi import WeatherApi
 from pages.WeatherPage import WeatherPage
@@ -5,7 +6,8 @@ from pages.base_page import BasePage
 
 
 class TestComp:
-
+    @allure.title('Testing api temperture results diffrence in relative to ui temperture result')
+    @allure.description('call api test than ui test substruct both and get the percentage of relative diffrence')
     @pytest.mark.parametrize("zip_code, api_key", [
         ("20852", "93f8f223148f4db7abc182516242611")
     ])
