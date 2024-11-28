@@ -28,14 +28,8 @@ class WeatherPage(BasePage):
             driver.take_screenshot(driver, item.name)
 
     def get_temp_using_web_ui(self):
-        #self._setup_driver()
         try:
             self.driver.get(f"http://www.weather.com/weather/today/l/{self.zip_code}")
-
-            # Wait for the temperature element to be visible and enabled
-            # element = WebDriverWait(self.driver, 10).until(
-            #     EC.visibility_of_element_located((By.CSS_SELECTOR, 'span[data-testid="TemperatureValue"]'))
-            # )
 
             element=SynchronizationMethods.explicit_wait_visibility(
                 self.driver,
@@ -48,7 +42,7 @@ class WeatherPage(BasePage):
             temp = float(element.text.replace('°', ''))
 
         except Exception as e:
-            print(f"Error scraping weather.com: {e}")
+            BasePage.logger.error(f"Error scraping weather.com: {e}")
             temp = None
 
         finally:

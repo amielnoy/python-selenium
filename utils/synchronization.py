@@ -3,6 +3,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 
+from pages.base_page import BasePage
+
+
 class SynchronizationMethods:
     @staticmethod
     def implicit_wait(driver, time_in_seconds):
@@ -48,7 +51,7 @@ if __name__ == "__main__":
             "exampleElementId",
             10
         )
-        print("Element is visible:", element)
+        BasePage.logger.log("Element is visible:", element)
 
         # Wait for an element to be clickable
         clickable_element = SynchronizationMethods.explicit_wait_clickable(
@@ -57,7 +60,7 @@ if __name__ == "__main__":
             "clickableElementId",
             10
         )
-        print("Element is clickable:", clickable_element)
+        BasePage.logger.info("Element is clickable:", clickable_element)
 
     finally:
         driver.quit()

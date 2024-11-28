@@ -1,6 +1,8 @@
 import pytest
 from Api.WeatherApi import WeatherApi
 from pages.WeatherPage import WeatherPage
+from pages.base_page import BasePage
+
 
 class TestComp:
 
@@ -22,9 +24,9 @@ class TestComp:
         gap = abs(webui_temp - temp_api) / webui_temp * 100
 
         # Print temperatures and gap for debugging
-        print(f"API Temperature: {temp_api}°F")
-        print(f"WebUI Temperature: {webui_temp}°F")
-        print(f"Temperature Gap: {gap:.2f}%")
+        BasePage.logger.info(f"API Temperature: {temp_api}°F")
+        BasePage.logger.info(f"WebUI Temperature: {webui_temp}°F")
+        BasePage.logger.info(f"Temperature Gap: {gap:.2f}%")
 
         # Assert that the gap is within acceptable range
         assert gap <= 10, f"Test Failed: Gap temp is {gap:.2f}%, which exceeds 10%"
